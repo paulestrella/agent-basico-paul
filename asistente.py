@@ -35,6 +35,9 @@ class Asistente:
         return f"El costo total es de ${costo_total:.2f}."
 
     def mostar_historial(self):
+        self.mostrar_historial()
+
+    def mostrar_historial(self):
         for quien, texto in self.historial:
             print(f"{quien}: {texto}")
 
