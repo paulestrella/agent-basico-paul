@@ -2,6 +2,18 @@ class Asistente:
     def __init__(self, nombre_negocio):
         self.nombre_negocio = nombre_negocio
         self.historial = []
+        self.preguntas_frecuentes = {
+            "horario": "Nuestro horario es de lunes a viernes, de 9:00 a 18:00.",
+            "ubicacion": "Estamos ubicados en el centro de la ciudad.",
+            "precios": "Puedes consultar nuestros precios en el negocio.",
+        }
+
+    def buscar_faq(self, mensaje_normalizado):
+        for clave, respuesta in self.preguntas_frecuentes.items():
+            if clave in mensaje_normalizado:
+                return respuesta
+
+        return "No entendi tu mensaje."
 
     def responder(self, mensaje):
         self.historial.append(mensaje)
@@ -9,7 +21,7 @@ class Asistente:
         if "hola" in mensaje.casefold() or "buenas" in mensaje.casefold():
             respuesta = f"Hola! Bienvenido a {self.nombre_negocio}."
         else:
-            respuesta = "No puedo ayudarte con ese mensaje."
+            respuesta = self.buscar_faq(mensaje.casefold())
 
         self.historial.append(respuesta)
         return respuesta
